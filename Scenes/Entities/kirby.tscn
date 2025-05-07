@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://l0br4ynv2q54"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrk0s"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dbh41"]
+graph_offset = Vector2(28, -40)
+
+[node name="Kirby" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_mrk0s")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_dbh41")

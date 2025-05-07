@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=4 uid="uid://csfgyxctq15br"]
+
+[ext_resource type="Texture2D" uid="uid://7wrf2iwtmnr4" path="res://Art/levels/kirbyfl-tiles.png" id="1_duh8g"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6m8qg"]
+texture = ExtResource("1_duh8g")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/left_side = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+0:1/0/terrains_peering_bit/top_side = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_side = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0/terrains_peering_bit/bottom_side = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_side = 0
+4:1/0 = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0/terrains_peering_bit/right_side = 0
+0:2/0/terrains_peering_bit/top_side = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0/terrains_peering_bit/right_side = 0
+1:2/0/terrains_peering_bit/left_side = 0
+1:2/0/terrains_peering_bit/top_side = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0/terrains_peering_bit/left_side = 0
+2:2/0/terrains_peering_bit/top_side = 0
+3:2/0 = 0
+3:2/0/terrain_set = 0
+3:2/0/terrain = 0
+5:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_som2o"]
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Test Tiles"
+terrain_set_0/terrain_0/color = Color(0.411765, 0.854902, 0.807843, 1)
+sources/0 = SubResource("TileSetAtlasSource_6m8qg")
+
+[node name="Map1" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(-1, 0)
+tile_map_data = PackedByteArray("AAAAAAcAAAABAAAAAAABAAcAAAABAAAAAAACAAgAAAABAAEAAAADAAgAAAABAAEAAAAEAAgAAAABAAEAAAAFAAgAAAABAAEAAAAGAAgAAAABAAEAAAAHAAgAAAABAAEAAAAIAAgAAAABAAEAAAAJAAgAAAABAAEAAAAJAAcAAAABAAAAAAAIAAcAAAABAAAAAAAHAAcAAAABAAAAAAAGAAcAAAABAAAAAAAFAAcAAAABAAAAAAAEAAcAAAABAAAAAAADAAcAAAABAAAAAAACAAcAAAABAAAAAAABAAgAAAABAAEAAAAAAAgAAAABAAEAAAAAAAkAAAABAAIAAAABAAkAAAABAAIAAAACAAkAAAABAAIAAAADAAkAAAABAAIAAAAEAAkAAAABAAIAAAAFAAkAAAABAAIAAAAGAAkAAAABAAIAAAAHAAkAAAABAAIAAAAIAAkAAAABAAIAAAAJAAkAAAABAAIAAAAKAAkAAAACAAIAAAAKAAgAAAACAAEAAAAKAAcAAAACAAAAAAAKAAYAAAAAAAIAAAAKAAUAAAACAAEAAAAKAAQAAAACAAEAAAAKAAMAAAACAAEAAAAKAAIAAAACAAEAAAD//wkAAAAAAAIAAAD//wgAAAAAAAEAAAD//wcAAAAAAAAAAAD//wYAAAACAAIAAAD//wUAAAAAAAEAAAD//wQAAAABAAEAAAD//wMAAAABAAEAAAD//wIAAAABAAEAAAD//wEAAAABAAEAAAD//wAAAAABAAEAAAD/////AAAAAAAAAAAAAP//AAACAAAAAAABAP//AAAAAAEAAAACAP//AAABAAEAAAADAP7/AAAAAAAAAAAEAP7/AAABAAIAAAAFAP7/AAABAAIAAAAGAP//AAAAAAEAAAAHAP//AAABAAEAAAAIAP//AAACAAIAAAAJAP//AAAAAAEAAAAKAP//AAACAAEAAAAGAP7/AAACAAAAAAADAP//AAACAAEAAAAAAAAAAAACAAEAAAABAAAAAAAAAAIAAAACAAAAAAABAAIAAAADAAAAAAABAAIAAAAEAAAAAAABAAIAAAAFAAAAAAABAAIAAAAGAAAAAAABAAIAAAAHAAAAAAABAAIAAAAJAAEAAAAAAAEAAAAKAAEAAAABAAEAAAALAAEAAAACAAIAAAALAAAAAAACAAAAAAAKAAAAAAABAAEAAAAJAAAAAAAAAAEAAAAIAAAAAAACAAIAAAAJAAYAAAAAAAIAAAAJAAUAAAAAAAEAAAAJAAQAAAAAAAEAAAAJAAMAAAAAAAEAAAAJAAIAAAAAAAEAAAAAAAEAAAACAAEAAAAAAAIAAAACAAEAAAAAAAMAAAACAAEAAAAAAAQAAAACAAEAAAAAAAUAAAACAAEAAAAAAAYAAAACAAIAAAALAAYAAAAAAAIAAAA=")
+tile_set = SubResource("TileSet_som2o")
