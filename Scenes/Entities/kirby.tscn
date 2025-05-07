@@ -1,15 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://l0br4ynv2q54"]
+[gd_scene load_steps=5 format=3 uid="uid://l0br4ynv2q54"]
+
+[ext_resource type="Script" uid="uid://b6a2m443xyfhd" path="res://Scripts/kirby.gd" id="1_y055i"]
+[ext_resource type="Texture2D" uid="uid://ckcwpsowmf12b" path="res://Art/Kirby/kirby.png" id="2_iopii"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrk0s"]
+size = Vector2(16, 16)
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dbh41"]
-graph_offset = Vector2(28, -40)
+[sub_resource type="SpriteFrames" id="SpriteFrames_0jsok"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iopii")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Kirby" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_y055i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -10)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_mrk0s")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_dbh41")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_0jsok")
