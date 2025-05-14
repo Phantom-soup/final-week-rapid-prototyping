@@ -1,87 +1,95 @@
 extends CharacterBody2D
 
 var fall_speed = 1500
+var puff_fall_speed = 700
 var gravity = 2500
 
 var direction = 0
 var last_direction = 1
-@export var speed = 1500
-@export var acceleration = 1500
-@export var friction = 4000
-@export var turn_acceleration = 8000
+var speed = 100
+var acceleration = 200
+var friction = 175
+var turn_acceleration = 400
 
-var jump_power_initial = -300
-var jump_power = 3000
-var jump_distance = -100
-var jump_time_max = 0.1
+var crouching = false
+var puffed = false
+
+var jump_power_initial = 500
+var jump_power = 4000
+var jump_distance = 16000
+var jump_time_max = 0.15
 var jump_timer = 0
+
 var coyote_time = 0.1
 var coyote_timer = 0
-var has_jumped = false
-var can_doublejump = false
 
-enum Act{IDLE, WALK, JUMPING, FALLING}
+enum Act{IDLE, WALK, JUMPING, CROUCH}
 var current_act: Act = Act.IDLE
 
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("Action"):
+		if puffed:
+			pass # star-bullet
+
 func _physics_process(delta: float) -> void:
-	grav_down(delta)
 	update_movement(delta)
+	grav_down(delta)
 	jump(delta)
-	update_acts()
+	coyote_timing(delta)
 	update_animation()
 	flip_sprite()
 	move_and_slide()
 
 func grav_down(delta: float) -> void:
-	velocity.y = move_toward(velocity.y, fall_speed, gravity * delta)
-
-func jump(delta: float) -> void:
-	if Input.is_action_just_pressed("A"):
-		if is_on_floor() or coyote_time > 0:
-			velocity.y = jump_power_initial
-	elif Input.is_action_pressed("A") and jump_timer < 0:
-		velocity.y = move_toward(velocity.y, jump_distance, jump_power * delta)
-		jump_timer -= delta
+	if puffed:
+		velocity.y = move_toward(velocity.y, puff_fall_speed, gravity * delta)
 	else:
-		jump_timer = -1
-
-func update_acts() -> void:
-	match current_act:
-		Act.IDLE:
-			if velocity.x != 0:
-				current_act = Act.WALK
-		
-		Act.WALK:
-			if velocity.x == 0:
-				current_act = Act.IDLE
-			if not is_on_floor() && velocity.y > 0:
-				current_act = Act.FALLING
-		
-		Act.JUMPING when velocity.y > 0:
-			current_act = Act.FALLING
-		
-		Act.FALLING:
-			if velocity.x == 0:
-				current_act = Act.IDLE
-			else:
-				current_act = Act.WALK
+		velocity.y = move_toward(velocity.y, fall_speed, gravity * delta)
+	if !is_on_floor():
+		crouching = false
 
 func update_movement(delta: float) -> void:
 	direction = Input.get_axis("Left", "Right")
 	
-	if direction:
-		if direction * velocity.x < 0:
-			velocity.x = move_toward(velocity.x, direction * speed, turn_acceleration * delta)
-		else:
-			velocity.x = move_toward(velocity.x, direction * speed, acceleration * delta)
+	if Input.is_action_pressed("Down"):
+		crouching = true
 	else:
+		crouching = false
+	
+	if direction:
+		last_direction = direction
+		
+		if direction * velocity.x < 0: #turning around
+			velocity.x = move_toward(velocity.x, direction * speed, turn_acceleration * delta)
+		elif puffed:
+			pass
+		else: #walking
+			velocity.x = move_toward(velocity.x, direction * speed, acceleration * delta)
+	else: #stopping
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
+
+func jump(delta: float) -> void:
+	if Input.is_action_just_pressed("A"):
+		if is_on_floor() or coyote_timer > 0:
+			velocity.y = -jump_power_initial
+			jump_timer = jump_time_max
+	elif Input.is_action_pressed("A") and jump_timer > 0:
+		jump_timer -= delta
+		velocity.y = move_toward(velocity.y, -jump_distance, jump_power * delta)
+	else:
+		jump_timer = -1
+
+func coyote_timing(delta: float) -> void:
+	if is_on_floor():
+		coyote_timer = coyote_time
+	else:
+		coyote_timer -= delta
+
+func update_animation() -> void:
+	pass
 
 func flip_sprite() -> void:
 	if velocity.x > 0:
 		$AnimatedSprite2D.flip_h = false
 	if velocity.x < 0:
 		$AnimatedSprite2D.flip_h = true
-
-func update_animation() -> void:
-	pass

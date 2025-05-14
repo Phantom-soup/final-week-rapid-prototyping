@@ -87,7 +87,3 @@ tile_set = SubResource("TileSet_som2o")
 
 [node name="Kirby" parent="." instance=ExtResource("2_6m8qg")]
 position = Vector2(76, 79)
-speed = 1000
-acceleration = 1000
-friction = 1000
-turn_acceleration = 1000
