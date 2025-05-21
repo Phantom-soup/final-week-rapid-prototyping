@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-var fall_speed = 1500
+var fall_speed = 200
 var puff_fall_speed = 700
-var gravity = 2500
+var gravity = 2000
 
 var direction = 0
 var last_direction = 1
@@ -14,10 +14,10 @@ var turn_acceleration = 400
 var crouching = false
 var puffed = false
 
-var jump_power_initial = 500
-var jump_power = 4000
-var jump_distance = 16000
-var jump_time_max = 0.15
+var jump_power_initial = 300
+var jump_power = 600
+var jump_distance = 1800
+var jump_time_max = 0.2
 var jump_timer = 0
 
 var coyote_time = 0.1
@@ -27,9 +27,9 @@ enum Act{IDLE, WALK, JUMPING, CROUCH}
 var current_act: Act = Act.IDLE
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("Action"):
+	if Input.is_action_just_pressed("B"):
 		if puffed:
-			pass # star-bullet
+			puffed = false
 
 func _physics_process(delta: float) -> void:
 	update_movement(delta)
@@ -73,7 +73,7 @@ func jump(delta: float) -> void:
 		if is_on_floor() or coyote_timer > 0:
 			velocity.y = -jump_power_initial
 			jump_timer = jump_time_max
-	elif Input.is_action_pressed("A") and jump_timer > 0:
+	elif Input.is_action_pressed("A") and jump_timer < 0:
 		jump_timer -= delta
 		velocity.y = move_toward(velocity.y, -jump_distance, jump_power * delta)
 	else:
