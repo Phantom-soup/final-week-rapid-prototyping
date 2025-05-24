@@ -39,6 +39,7 @@ func _physics_process(delta: float) -> void:
 	update_animation()
 	flip_sprite()
 	move_and_slide()
+	print(puffed)
 
 func grav_down(delta: float) -> void:
 	if puffed:
