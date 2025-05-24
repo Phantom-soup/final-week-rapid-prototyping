@@ -15,7 +15,7 @@ var crouching = false
 var puffed = false
 
 var jump_power_initial = 300
-var jump_power = 600
+var jump_power = 1000
 var jump_distance = 1800
 var jump_time_max = 0.2
 var jump_timer = 0
